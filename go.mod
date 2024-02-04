@@ -4,6 +4,7 @@ go 1.21.4
 
 require (
 	github.com/benbjohnson/clock v1.3.5
+	github.com/google/go-cmp v0.5.9
 	github.com/prometheus/client_golang v1.18.0
 	gopkg.in/yaml.v3 v3.0.1
 )

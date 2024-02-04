@@ -40,7 +40,7 @@ func NewRunnerWithConfig(c Config) (Runner, error) {
 	if err != nil {
 		return Runner{}, err
 	}
-	tasks, err := c.ToTasks(WebTaskFactory{})
+	tasks, err := c.ToTasks(WebTaskFactory{}, ProcessTaskFactory{})
 	if err != nil {
 		return Runner{}, err
 	}

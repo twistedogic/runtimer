@@ -34,6 +34,22 @@ func (p Parameters) String(field string) (string, error) {
 	return v, nil
 }
 
+func (p Parameters) StringSlice(field string) ([]string, error) {
+	i, ok := p[field]
+	if !ok {
+		return nil, fmt.Errorf("field %q not found", field)
+	}
+	slice, ok := i.([]interface{})
+	if !ok {
+		return nil, fmt.Errorf("field %q is not []string", field)
+	}
+	v := make([]string, len(slice))
+	for i, val := range slice {
+		v[i] = fmt.Sprintf("%v", val)
+	}
+	return v, nil
+}
+
 type TaskConfig struct {
 	Name       string     `yaml:"name"`
 	Type       string     `yaml:"type"`

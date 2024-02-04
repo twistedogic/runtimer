@@ -2,8 +2,9 @@ package internal
 
 import (
 	"os"
-	"reflect"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 func Test_parseConfig(t *testing.T) {
@@ -12,6 +13,13 @@ func Test_parseConfig(t *testing.T) {
 			Interval: "5s",
 			Buckets:  []float64{0, 1, 2, 5},
 			Tasks: []TaskConfig{
+				TaskConfig{
+					Name: "a", Type: "process",
+					Parameters: map[string]interface{}{
+						"cmd":  "echo",
+						"args": []interface{}{"hi", 1},
+					},
+				},
 				TaskConfig{
 					Name: "b", Type: "web",
 					Parameters: map[string]interface{}{
@@ -34,8 +42,8 @@ func Test_parseConfig(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			if !reflect.DeepEqual(want, got) {
-				t.Fatalf("want: %v, got: %v", want, got)
+			if diff := cmp.Diff(want, got); diff != "" {
+				t.Fatal(diff)
 			}
 		})
 	}

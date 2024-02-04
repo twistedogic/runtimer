@@ -1,6 +1,13 @@
 interval: 5s
 buckets: [0, 1, 2, 5]
 tasks:
+  - name: a
+    type: process
+    parameters:
+      cmd: echo
+      args:
+        - hi
+        - 1
   - name: b
     type: web
     parameters:

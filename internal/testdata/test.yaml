@@ -1,0 +1,9 @@
+interval: 5s
+buckets: [0, 1, 2, 5]
+tasks:
+  - name: b
+    type: web
+    parameters:
+      method: "GET"
+      url: "http://localhost:3000"
+      status_code: 200
